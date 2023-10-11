@@ -31,9 +31,13 @@
             document.form1.director.focus();
             return false;
         }else{
-            alert("게시물 추가됩니다");
+            var result = confirm("게시물 추가됩니다");
+        if (result) {
             return true; // Allow the form submission if all checks pass
+        } else {
+            return false;
         }
+    }
 
     }
 </script>
