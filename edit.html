@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script>
+    function confirmDelete() {
+        var result = confirm("정말 삭제하시겠습니까?");
+        if (result) {
+            window.location.href = 'index.html';
+        } else {
+
+        }
+    }
+</script>
+<script>
+    function checkValue() {
+        var director = document.form1.director.value;
+        var title = document.form1.title.value;
+
+        if (title === '') {
+            alert("제목을 입력하세요");
+            document.form1.title.focus();
+            return false;
+        }else if(director === ''){
+            alert("감독을 입력하세요");
+            document.form1.director.focus();
+            return false;
+        }else{
+            alert("게시물을 수정할까요?");
+            return true; // Allow the form submission if all checks pass
+        }
+
+    }
+</script>
+  <style>
+    /* Remove the navbar's default rounded borders and increase the bottom margin */ 
+    .navbar {
+      margin-bottom: 50px;
+      border-radius: 0;
+      background-color: #67060b; /* 넷플릭스 레드 색상 코드 */
+    }
+    
+    /* Remove the jumbotron's default bottom margin */ 
+     .jumbotron {
+      margin-bottom: 0;
+      background-color: #1e1e1e;
+    }
+   
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #1e1e1e;
+      padding: 25px;
+    }
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .netflix-red-text {
+      color: #67060b; /* 넷플릭스 레드 색상 코드 */
+    }
+    .panel-link {
+        text-align: center;
+        cursor: pointer; /* 마우스 커서를 손가락 형태로 바꿔주는 스타일 */
+    }
+    .center-panel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000000; /* 전체 배경색을 검정색으로 설정 */
+    }
+    .invalid-feedback {
+        color: red;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1 style="color: #67060b;">NRDB</h1>    
+    <p class="netflix-red-text">Netflix Rating Data Base</p>
+  </div>
+</div>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="#">Home</a></li>
+        <li class="active"><a href="#">Movies</a></li>
+        <li><a href="#">TVshows</a></li>
+        <li><a href="#">New&Poplar</a></li>
+        <li><a href="#">My Lsit</a></li>
+        <li><a href="#">Games</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
+        <li><a href="#"> <i class="fas fa-sign-out-alt"></i>Log out</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<form name="form1" action="index.html" onsubmit="return checkValue()" method="post">
+    <div class="invalid-feedback">
+    <label for="image">Choose an image:</label>
+    </div>
+    <input type="file" id="image" name="image" accept="image/*">
+    <br>
+    <br>
+    <div class="invalid-feedback">
+    <label for="title">Title:</label>
+    </div>
+    <input type="text" name="title"/>
+    <div class="invalid-feedback">
+        Valid title is required.
+    </div>
+    <br>
+    <br>
+    <div class="invalid-feedback">
+    <label for="director">Director:</label>
+    </div>
+    <input type="text" name="director"/>
+    <div class="invalid-feedback">
+        Valid Director is required.
+    </div>
+    <br>
+    <div class="invalid-feedback">
+    Certification:
+    <br>
+</div>
+    <select name="certification">
+        <option vlaue="1">G</option>
+        <option vlaue="2">PG</option>
+        <option vlaue="3">PG 13</option>
+        <option vlaue="4">R</option>
+    </select> 
+    <br>
+    <br>
+    <div class="invalid-feedback">
+    Rrating:
+    <br>
+    </div>
+    <input type="number" name="rating" max="10" min="1">
+    <div class="invalid-feedback">
+        rate 1~10
+    </div>
+    <br>
+    <div class="invalid-feedback">
+        <label for="title">Stars:</label>
+        </div>
+        <textarea name='stars' cols="40" rows="2">
+        </textarea>
+        <br>
+        <br>
+    <input type="submit" value="Save">
+    <br>
+    <script>
+        window.onload = function() {
+            // Function to get query parameter from URL
+            function getQueryParam(name) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(name);
+            }
+
+            // Populate form fields with data from query parameters
+            document.form1.image.value = getQueryParam('image') || '';
+            document.form1.title.value = getQueryParam('title') || 'Inglourious Basterds';
+            document.form1.director.value = getQueryParam('director') || 'Quentin Tarantino';
+            document.form1.certification.value = getQueryParam('certification') || 'R';
+            document.form1.rating.value = getQueryParam('rating') || '8';
+            document.form1.stars.value = getQueryParam('stars') || 'Brad Pitt, Diane Kruger, Eli Roth';
+        };
+    </script>
+</form>
+
+  <br>
+
+
+  <footer class="container-fluid text-center">
+    <p>Online Store Copyright</p>  
+      <input type="button" value="Add More Data" onclick= "navigateToAddPage();"/>
+    </form>
+  </footer>
+
+</body>
+</html>
+
